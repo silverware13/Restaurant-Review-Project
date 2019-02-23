@@ -24,17 +24,21 @@ Released   : 20130731
 
 </head>
 <body>
+
 <div id="logo" class="container">
 	<h1><a href="#">Restaurant<span>Reviews</span>Database</a></h1>
 	<p>Design by <a href="http://templated.co" rel="nofollow">TEMPLATED</a></p>
 </div>
+
 <div id="menu" class="container">
 	<ul>
 		<li class="current_page_item"><a href="#" accesskey="1" title="">Homepage</a></li>
 		<li><a href="./show-rests.php" accesskey="2" title="">Restaurant Reviews</a></li>
 	</ul>
 </div>
+
 <div id="banner" class="container"> <img src="images/pic01.jpg" width="1200" height="500" alt="" /></div>
+
 <div id="three-column" class="container">
 	<div id="tbox1" style="width:22%;">
 		<h2>Restaurant Review Database</h2>
@@ -95,14 +99,15 @@ Released   : 20130731
 		
 		<p><b>Cuisine:</b> Stores information about specific cuisine (e.g. Mexican, Chinese).</p>
 		<ul style="list-style-type:disc;padding-left: 50px;">
-		  <li><b><u>cname</u>:</b> The name of the type of cuisine.</li>
+		  <li><b><u>cid</u>:</b> An incremented ID to easily identify cuisine.</li>
+		  <li><b>cname:</b> The name of the type of cuisine.</li>
 		  <li><b>cdesc:</b> A short description of the cuisine.</li>
 		</ul>
 		
 		<p><b>Rests_Cuisine:</b> M-to-M Relationship of restaurants to cuisine (May serve more than one type).</p>
 		<ul style="list-style-type:disc;padding-left: 50px;">
 		  <li><b><u>rid</u>:</b> Foreign key that helps match to the Rests table.</li>
-		  <li><b><u>cname</u>:</b> Foreign key that helps match to the Cuisine table.</li>
+		  <li><b><u>cid</u>:</b> Foreign key that helps match to the Cuisine table.</li>
 		</ul>
 		
 	</div>
