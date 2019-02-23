@@ -1,33 +1,108 @@
-<!DOCTYPE html>
-<html>
-     <head>
-          <title>Review Database</title>
-     	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-     	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
-     	<link rel="stylesheet" href="css/style.css">
-     </head>
-     <body class="homepage">
-          <div id="main">
-               <div id="header-wrapper">
-               <div id="header" class="container">
-               	<div id="logo">
-               		<h1><a href="./"><strong>Restaurant Review Database</strong></a></h1>
-               	</div>
-               	<div id="menu">
-               		<ul>
-               			<li><a href="./show-rests.php" accesskey="1" title="">List Restaurants</a></li>
-               		</ul>
-               	</div>
-               </div></div>
-               <div id="page" class="container">
-               	<div id="content">
-               		<div class="title">
-               			<h2>Welcome to Restaurant Review Database</h2>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!--
+Design by TEMPLATED
+http://templated.co
+Released for free under the Creative Commons Attribution License
 
-                         </div>
-               		<p>This database stores information about restaurant reviews.</p>
-                    </div>
-               </div>
-          </div>
-     </body>
+Name       : WellFormed 
+Description: A two-column, fixed-width design with dark color scheme.
+Version    : 1.0
+Released   : 20130731
+
+-->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet" />
+<link href="default.css" rel="stylesheet" type="text/css" media="all" />
+<link href="fonts.css" rel="stylesheet" type="text/css" media="all" />
+
+<!--[if IE 6]><link href="default_ie6.css" rel="stylesheet" type="text/css" /><![endif]-->
+
+</head>
+<body>
+<div id="logo" class="container">
+	<h1><a href="#">Restaurant<span>Reviews</span>Database</a></h1>
+	<p>Design by <a href="http://templated.co" rel="nofollow">TEMPLATED</a></p>
+</div>
+<div id="menu" class="container">
+	<ul>
+		<li class="current_page_item"><a href="#" accesskey="1" title="">Homepage</a></li>
+		<li><a href="#" accesskey="1" title="">Restaurant Reviews</a></li>
+	</ul>
+</div>
+<div id="banner" class="container"> <img src="images/pic01.jpg" width="1200" height="500" alt="" /></div>
+<div id="three-column" class="container">
+	<div id="tbox1" style="width:22%;">
+		<h2>Restaurant Review Database</h2>
+		
+		<h3>The problem:</h3>
+		<p>With so many sources to find restaurant reviews, that have different rating systems, formats, and biases, it can be difficult to determine the ideal restaurant to go to. 
+		One website may rate an establishment as a five-star restaurant, while another site may rate it on a point scale, or some different system. The main problem is that inconsistency between websites does very little to help people decide where to eat.
+		In addition, there are multiple options for restaurant rating websites out there. Now a consumer is forced to first decide which website they’d like to use, and then use that to decide which restaurant to eat at. 
+		What if restaurant “A” only has reviews on Tripadvisor, and restaurant “B” only has reviews on Eater? 
+		If an individual is trying to select between restaurants “A” and “B” this requires them to understand the different formats of the sites and differing grading criteria.</p>
+		
+		<h3>A brief plan on how we plan to address the aforementioned issues:</h3>
+		<p>We will design a site that uses our database to display standardized reviews of restaurants from multiple sources.
+		Our database will have standardized ratings and combine ratings from various sources to get an average of restaurant reviews. To standardize the reviews per site, we will have to convert the site’s score into our own scale, which may differ per site. The method for standardization will require research into the site’s own scoring system.
+		To obtain the data we will use data sets, such as the ones available from Yelp, and Zomato’s API. We will design software or use software that can format our data as needed.
+		</p>
+	</div>
+	<div id="tbox2" style="width:60%">
+		<h2>Database Structure</h2>
+		<a href="#" class="image image-full"><img src="images/pic02.jpg" alt="" sty/></a>
+		
+		<p><b>Rests:</b> Stores basic restaurant information.</p>
+		<ul style="list-style-type:disc;padding-left: 50px;">
+		  <li><b><u>rid</u>:</b> An incremented ID to easily identify restaurants.</li>
+		  <li><b>rname:</b> The restaurant name.</li>
+		  <li><b>raddress:</b> The address of the restaurant.</li>
+		</ul>
+		
+		<p><b>Rating:</b> Stores information about restaurant reviews. (1 to 1 relationship)</p>
+		<ul style="list-style-type:disc;padding-left: 50px;">
+		  <li><b><u>rid</u>:</b> Foreign key that helps match reviews to the Rests table.</li>
+		  <li><b>roverall:</b> This is the overall rating of the restaurant. The rating is from 1-100.</li>
+		  <li><b>rfood:</b> This is the rating of food quality. The rating is from 1-100.</li>
+		  <li><b>rservice:</b> This is the rating for the service. The rating is from 1-100.</li>
+		  <li><b>rvalue:</b> This is the rating related to price of the food. The rating is from 1-100.</li>
+		  <li><b>ratmo:</b> This is the rating of the atmosphere. The rating is from 1-100.</li>
+		</ul>
+		
+		<p><b>Meals:</b> Stores information about specific meals.</p>
+		<ul style="list-style-type:disc;padding-left: 50px;">
+		  <li><b><u>mid</u>:</b> An incremented ID to easily identify meals.</li>
+		  <li><b>mname:</b> Name of the meal (It is possible for meals to share the same name).</li>
+		  <li><b>mprice:</b> The price of the meal in USD.</li>
+		</ul>
+		
+		<p><b>Rests_Meals:</b> M-to-M Relationship of restaurants to meals (May be part of a restaurant chain).</p>
+		<ul style="list-style-type:disc;padding-left: 50px;">
+		  <li><b><u>rid</u>:</b> Foreign key that helps match to the Rests table.</li>
+		  <li><b><u>mid</u>:</b> Foreign key that helps match to the Meals table.</li>
+		</ul>
+		
+		<p><b>Cuisine:</b> Stores information about specific cuisine (e.g. Mexican, Chinese).</p>
+		<ul style="list-style-type:disc;padding-left: 50px;">
+		  <li><b><u>cname</u>:</b> The name of the type of cuisine.</li>
+		  <li><b>cdesc:</b> A short description of the cuisine.</li>
+		</ul>
+		
+		<p><b>Rests_Cuisine:</b> M-to-M Relationship of restaurants to cuisine (May serve more than one type).</p>
+		<ul style="list-style-type:disc;padding-left: 50px;">
+		  <li><b><u>rid</u>:</b> Foreign key that helps match to the Rests table.</li>
+		  <li><b><u>cname</u>:</b> Foreign key that helps match to the Cuisine table.</li>
+		</ul>
+		
+	</div>
+</div>
+
+<div id="copyright" class="container">
+	<p>Design by <a href="http://templated.co" rel="nofollow">TEMPLATED</a>.</p>
+</div>
+</body>
 </html>
