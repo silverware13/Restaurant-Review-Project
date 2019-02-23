@@ -63,14 +63,21 @@ Released   : 20130731
 		  <li><b>raddress:</b> The address of the restaurant.</li>
 		</ul>
 		
-		<p><b>Rating:</b> Stores information about restaurant reviews. (1 to 1 relationship)</p>
+		<p><b>Rating:</b> Stores information about restaurant reviews.</p>
 		<ul style="list-style-type:disc;padding-left: 50px;">
 		  <li><b><u>rid</u>:</b> Foreign key that helps match reviews to the Rests table.</li>
+		  <li><b><u>sid</u>:</b> Foreign key that helps match reviews to the Source table.</li>
 		  <li><b>roverall:</b> This is the overall rating of the restaurant. The rating is from 1-100.</li>
 		  <li><b>rfood:</b> This is the rating of food quality. The rating is from 1-100.</li>
 		  <li><b>rservice:</b> This is the rating for the service. The rating is from 1-100.</li>
 		  <li><b>rvalue:</b> This is the rating related to price of the food. The rating is from 1-100.</li>
 		  <li><b>ratmo:</b> This is the rating of the atmosphere. The rating is from 1-100.</li>
+		</ul>
+		
+		<p><b>Source:</b> Stores information about the groups that generate reviews.</p>
+		<ul style="list-style-type:disc;padding-left: 50px;">
+		  <li><b><u>sid</u>:</b> An incremented ID to easily identify sources.</li>
+		  <li><b>sname:</b> The name of the source.</li>
 		</ul>
 		
 		<p><b>Meals:</b> Stores information about specific meals.</p>

@@ -58,7 +58,7 @@ $dbname = "cs340_thomasza";
 					$conn->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
 
 					// find all reviews
-					$stmt = $conn->prepare("SELECT rname, raddress, roverall, rfood, rservice, rvalue, ratmo FROM Rests, Rating WHERE Rests.rid = Rating.rid"); // use SQL to find all reviews.
+					$stmt = $conn->prepare("SELECT rname, raddress, roverall, rfood, rservice, rvalue, ratmo, source FROM Rests, Rating WHERE Rests.rid = Rating.rid"); // use SQL to find all reviews.
 
 					// add a string for each review
 					if($stmt->execute()) {
