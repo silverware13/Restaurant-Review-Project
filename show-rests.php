@@ -41,7 +41,7 @@ $dbname = "cs340_thomasza";
 		<li class="current_page_item"><a href="#" accesskey="2" title="">Restaurant Reviews</a></li>
 	</ul>
 </div>
-<div id="banner" class="container"> <img src="images/pic01.jpg" width="1200" height="500" alt="" /></div>
+<div id="banner" class="container"> <img src="images/pic03.jpg" width="1200" height="500" alt="" /></div>
  
 <div id="three-column" class="container">
 	<div id="tbox1" style="width:100%;">
@@ -58,7 +58,7 @@ $dbname = "cs340_thomasza";
 					$conn->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
 
 					// find all reviews
-					$stmt = $conn->prepare("SELECT rname, raddress, roverall, rfood, rservice, rvalue, ratmo, source FROM Rests, Rating WHERE Rests.rid = Rating.rid"); // use SQL to find all reviews.
+					$stmt = $conn->prepare("SELECT rname, raddress, roverall, rfood, rservice, rvalue, ratmo, sname FROM Rests R, Rating RT, Sources S WHERE R.rid = RT.rid AND RT.sid = S.sid ORDER BY rname"); // use SQL to find all reviews.
 
 					// add a string for each review
 					if($stmt->execute()) {
