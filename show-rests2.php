@@ -3,6 +3,8 @@
 session_start();
 ?>
 
+<?php error_reporting(E_ALL); ini_set('display_errors', '1');?>
+
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -51,7 +53,7 @@ $dbname = "cs440_thomasza";
 		FROM Rests AS R, Cuisine AS C, Rests_Cuisine AS RC<br />
 		WHERE R.rid = RC.rid AND C.cid = RC.cid<br />
 		GROUP BY rname<br />
-		ORDER BY rname;<br /></h3>
+		ORDER BY rname;<br /><br /><br /></h3>
 		
 		<!-- create table from restaurant info -->
 		<table style="border: 1px solid black;">

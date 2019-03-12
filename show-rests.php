@@ -3,6 +3,8 @@
 session_start();
 ?>
 
+<?php error_reporting(E_ALL); ini_set('display_errors', '1');?>
+
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -50,9 +52,8 @@ $dbname = "cs440_thomasza";
 		SELECT rname AS Name, raddress AS Address, roverall AS Overall_Rating, rfood AS Food_Rating, rservice AS Service_Rating,<br />
 		rvalue AS Value_Rating, ratmo AS Atmosphere_Rating, sname AS Review_Source<br />
 		FROM Rests R, Rating RT, Sources S<br />
-		WHERE R.rid = RT.rid<br />
-		AND RT.sid = S.sid<br />
-		ORDER BY rname";<br /></h3>
+		WHERE R.rid = RT.rid AND RT.sid = S.sid<br />
+		ORDER BY rname;<br /><br /><br /></h3>
 		
 		<!-- create table from restaurant info -->
 		<table style="border: 1px solid black;">

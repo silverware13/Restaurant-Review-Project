@@ -27,6 +27,8 @@ $password = file_get_contents('./db-password.txt', true);
 $dbname = "cs440_thomasza";
 ?>
 
+<?php error_reporting(E_ALL); ini_set('display_errors', '1');?>
+
 <div id="logo" class="container">
 	<h1><a href="#">Restaurant<span>Reviews</span>Database</a></h1>
 	<p>Design by <a href="http://templated.co" rel="nofollow">TEMPLATED</a></p>
@@ -51,7 +53,7 @@ $dbname = "cs440_thomasza";
 		FROM Rests AS R, Meals AS M, Rests_Meals AS RM<br />
 		WHERE R.rid = RM.rid AND M.mid = RM.mid<br />
 		GROUP BY rname<br />
-		ORDER BY rname;<br /></h3>
+		ORDER BY rname;<br /><br /><br /></h3>
 		
 		<!-- create table from restaurant info -->
 		<table style="border: 1px solid black;">
