@@ -34,10 +34,10 @@ $dbname = "cs440_thomasza";
 
 <div id="menu" class="container">
 	<ul>
-		<li><a href="index.html" accesskey="1" title=""><a href="#" accesskey="1" title="">Homepage</a></li>
-		<li class="current_page_item"><a href="#" accesskey="2" title="">Restaurant Info + Restaurant Reviews + Review Sources</a></li>
-		<li><a href="./show-rests2.php" accesskey="3" title="">Restaurant Info + Cuisine</a></li>
-		<li><a href="./show-rests3.php" accesskey="4" title="">Restaurant Info + Menu Items</a></li>
+		<li><a href="index.html" accesskey="1" title=""><a href="index.html" accesskey="1" title="">Homepage</a></li>
+		<li class="current_page_item"><a href="#" accesskey="2" title="">RI+RR+RS</a></li>
+		<li><a href="./show-rests2.php" accesskey="3" title="">RI+C</a></li>
+		<li><a href="./show-rests3.php" accesskey="4" title="">RI+MI</a></li>
 	</ul>
 </div>
 
@@ -45,7 +45,14 @@ $dbname = "cs440_thomasza";
 
 <div id="three-column" class="container">
 	<div id="tbox1" style="width:90%;">
-		<h2>Restaurant Reviews</h2>
+		<h2>Restaurant Info + Restaurant Reviews + Review Sources</h2>
+		<h3><b>SQL QUERY:<b/><br />
+		SELECT rname AS Name, raddress AS Address, roverall AS Overall_Rating, rfood AS Food_Rating, rservice AS Service_Rating,<br />
+		rvalue AS Value_Rating, ratmo AS Atmosphere_Rating, sname AS Review_Source<br />
+		FROM Rests R, Rating RT, Sources S<br />
+		WHERE R.rid = RT.rid<br />
+		AND RT.sid = S.sid<br />
+		ORDER BY rname";<br /></h3>
 		
 		<!-- create table from restaurant info -->
 		<table style="border: 1px solid black;">
