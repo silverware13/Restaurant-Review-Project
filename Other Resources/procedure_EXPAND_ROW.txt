@@ -1,0 +1,54 @@
+BEGIN
+	
+    # We declare ids that we will find later.
+    DECLARE _rid, _cid, _mid, has_error INT DEFAULT 0;
+
+    # Ignore invalid inserts (They will not be accepted anyways).
+    DECLARE CONTINUE HANDLER FOR SQLEXCEPTION SET has_error = 1;
+
+	# If the restaurant isn't already in the database add it.
+	IF NOT EXISTS (SELECT * FROM Rests WHERE rname = _rname AND raddress = _raddress) THEN
+    	INSERT INTO Rests (rname, raddress)
+		VALUES (_rname, _raddress);
+   	END IF;
+    
+    # Get the restaurant id.
+    SELECT rid INTO _rid FROM Rests WHERE rname = _rname AND raddress = _raddress;
+    
+    # If the rating doesn't already exist add it.
+    IF NOT EXISTS (SELECT * FROM Rating WHERE sid = 1 AND rid = _rid) THEN
+    	INSERT INTO Rating (rid,sid,roverall,rfood,rservice,rvalue,ratmo)
+    	VALUES (_rid,_source,_roverall,_rfood,_rservice,_rvalue,_ratmo);
+    END IF;
+    
+    # If the cuisine doesn't already exist and the name is not blank, then add it.
+    IF (_cname != "" AND NOT EXISTS (SELECT * FROM Cuisine WHERE cname = _cname)) THEN
+    	INSERT INTO Cuisine (cname)
+    	VALUES (_cname);
+    END IF;
+    
+    # Get the cuisine id.
+    SELECT cid INTO _cid FROM Cuisine WHERE cname = _cname;
+    
+    # Connect the restaurant and the cuisine.
+    IF (_cid != 0 AND NOT EXISTS (SELECT * FROM Rests_Cuisine WHERE rid = _rid AND cid = _cid)) THEN
+    	INSERT INTO Rests_Cuisine (rid,cid)
+    	VALUES (_rid,_cid);
+    END IF;
+    
+        # If the meal doesn't already exist and the name is not blank, then add it.
+    IF (_mname != "" AND NOT EXISTS (SELECT * FROM Meals WHERE mname = _mname)) THEN
+    	INSERT INTO Meals (mname)
+    	VALUES (_mname);
+    END IF;
+    
+    # Get the meal id.
+    SELECT mid INTO _mid FROM Meals WHERE mname = _mname;
+    
+    # Connect the restaurant and the meal.
+    IF (_mid != 0 AND NOT EXISTS (SELECT * FROM Rests_Meals WHERE rid = _rid AND mid = _mid)) THEN
+        INSERT INTO Rests_Meals (rid,mid)
+    	VALUES (_rid,_mid);
+    END IF;
+    
+END

@@ -1,0 +1,37 @@
+BEGIN
+
+  # Declare the diffrent columns in a row.
+  DECLARE _rname, _raddress, _cname, _mname VARCHAR(100) DEFAULT "Empty";
+  DECLARE _roverall, _rfood, _rservice, _rvalue, _ratmo, has_error INT DEFAULT 0;
+
+  # Declare cursor information.
+  DECLARE cur CURSOR FOR (SELECT rname, raddress, cname, mname, roverall, rfood, rservice, rvalue, ratmo FROM New);
+  
+  # Ignore invalid inserts (They will not be accepted anyways).
+  DECLARE CONTINUE HANDLER FOR SQLEXCEPTION SET has_error = 1;
+  
+  # Start using cursor.
+  OPEN cur;
+  
+  # Loop through each row.
+	my_loop: LOOP
+		
+        # Fetch next row.
+		FETCH NEXT FROM cur INTO _rname, _raddress, _cname, _mname, _roverall, _rfood, _rservice, _rvalue, _ratmo;
+        
+		# Distribute our row into the DB.
+		CALL expand_row(_rname,_raddress,_roverall,_rfood,_rservice,_rvalue,_ratmo,_cname,_mname,_source);		
+  
+		# We have one less row. See if we should stop.
+		SET _rows = _rows - 1;
+		IF _rows < 2 THEN
+			# We have reached the end of the table. Stop.
+			LEAVE my_loop;
+		END IF;
+		
+  END LOOP;
+  
+  # Stop using cursor.
+  CLOSE cur;
+  
+END

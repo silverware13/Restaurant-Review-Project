@@ -35,8 +35,8 @@ $dbname = "cs440_thomasza";
 <div id="menu" class="container">
 	<ul>
 		<li><a href="index.html" accesskey="1" title=""><a href="#" accesskey="1" title="">Homepage</a></li>
-		<li class="current_page_item"><a href="#" accesskey="2" title="">Restaurant Info + Restaurant Reviews + Review Sources</a></li>
-		<li><a href="./show-rests2.php" accesskey="3" title="">Restaurant Info + Cuisine</a></li>
+		<li><a href="./show-rests.php" accesskey="2" title="">Restaurant Info + Restaurant Reviews + Review Sources</a></li>
+		<li class="current_page_item"><a href="#" accesskey="3" title="">Restaurant Info + Cuisine</a></li>
 		<li><a href="./show-rests3.php" accesskey="4" title="">Restaurant Info + Menu Items</a></li>
 	</ul>
 </div>
@@ -53,12 +53,7 @@ $dbname = "cs440_thomasza";
 		  <tr style="border: 1px solid black;">
 			<td style="border: 1px solid black;">Name</td>
 			<td style="border: 1px solid black;">Address</td>
-			<td style="border: 1px solid black;">Overall_Rating</td>
-			<td style="border: 1px solid black;">Food_Rating</td>
-			<td style="border: 1px solid black;">Service_Rating</td>
-			<td style="border: 1px solid black;">Value_Rating</td>
-			<td style="border: 1px solid black;">Atmosphere_Rating</td>
-			<td style="border: 1px solid black;">Review_Source</td>
+			<td style="border: 1px solid black;">Cuisine</td>
 		  </tr>
 		</thead>
 		<tbody>
@@ -71,11 +66,12 @@ $dbname = "cs440_thomasza";
 				die("Connection failed: " . $conn->connect_error);
 			}
 			// get data from the database with an SQL query.
-			$sql = "SELECT rname AS Name, raddress AS Address, roverall AS Overall_Rating, rfood AS Food_Rating, rservice AS Service_Rating, rvalue AS Value_Rating, ratmo AS Atmosphere_Rating, sname AS Review_Source
-			FROM Rests R, Rating RT, Sources S 
-			WHERE R.rid = RT.rid 
-			AND RT.sid = S.sid 
-			ORDER BY rname";
+			$sql = 
+			"SELECT rname AS Name, raddress AS Address, GROUP_CONCAT(DISTINCT cname) AS Cuisine
+			FROM Rests AS R, Cuisine AS C, Rests_Cuisine AS RC
+			WHERE R.rid = RC.rid AND C.cid = RC.cid
+			GROUP BY rname
+			ORDER BY rname;
 			$result = $conn->query($sql);
 			// add a row to the table for each restaurant review.
 			while($row = $result->fetch_assoc()) {
@@ -83,12 +79,7 @@ $dbname = "cs440_thomasza";
 			  <tr style="border: 1px solid black;">
 			  <td style="border: 1px solid black;"><?php echo $row["Name"]?></td>
 			  <td style="border: 1px solid black;"><?php echo $row["Address"]?></td>
-			  <td style="border: 1px solid black;"><?php echo $row["Overall_Rating"]?></td>
-			  <td style="border: 1px solid black;"><?php echo $row["Food_Rating"]?></td>
-			  <td style="border: 1px solid black;"><?php echo $row["Service_Rating"]?></td>
-			  <td style="border: 1px solid black;"><?php echo $row["Value_Rating"]?></td>
-			  <td style="border: 1px solid black;"><?php echo $row["Atmosphere_Rating"]?></td>
-			  <td style="border: 1px solid black;"><?php echo $row["Review_Source"]?></td>
+			  <td style="border: 1px solid black;"><?php echo $row["Cuisine"]?></td>
 			  </tr>
 		<?php
 		}
