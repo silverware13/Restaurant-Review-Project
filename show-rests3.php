@@ -27,8 +27,6 @@ $password = file_get_contents('./db-password.txt', true);
 $dbname = "cs440_thomasza";
 ?>
 
-<?php error_reporting(E_ALL); ini_set('display_errors', '1');?>
-
 <div id="logo" class="container">
 	<h1><a href="#">Restaurant<span>Reviews</span>Database</a></h1>
 	<p>Design by <a href="http://templated.co" rel="nofollow">TEMPLATED</a></p>
@@ -40,26 +38,27 @@ $dbname = "cs440_thomasza";
 		<li><a href="./show-rests.php" accesskey="2" title="">RI+RR+RS</a></li>
 		<li><a href="./show-rests2.php" accesskey="3" title="">RI+C</a></li>
 		<li class="current_page_item"><a href="#" accesskey="4" title="">RI+MI</a></li>
+		<li><a href="./show-rests4.php" accesskey="5" title="">RI="Fried Calamari"</a></li>
 	</ul>
 </div>
 
 <div id="banner" class="container"> <img src="images/pic03.jpg" width="1200" height="500" alt="" /></div>
 
 <div id="three-column" class="container">
-	<div id="tbox1" style="width:90%;">
+	<div id="tbox1" style="width:92%;">
 		<h2>Restaurant Info + Menu Items</h2>
 		<h3><b>SQL QUERY:<b/><br />
-		SELECT rname AS Name, raddress AS Address, GROUP_CONCAT(DISTINCT mname) AS Menu<br />
+		<i>SELECT rname AS Restaurant, raddress AS Address, GROUP_CONCAT(DISTINCT mname) AS Menu<br />
 		FROM Rests AS R, Meals AS M, Rests_Meals AS RM<br />
 		WHERE R.rid = RM.rid AND M.mid = RM.mid<br />
 		GROUP BY rname<br />
-		ORDER BY rname;<br /><br /><br /></h3>
+		ORDER BY rname;<i/><br /><br /><br /></h3>
 		
 		<!-- create table from restaurant info -->
-		<table style="border: 1px solid black;">
+		<table width="100%" style="border: 1px solid black;table-layout: fixed;">
 		<thead>
 		  <tr style="border: 1px solid black;">
-			<td style="border: 1px solid black;">Name</td>
+			<td style="border: 1px solid black;">Restaurant</td>
 			<td style="border: 1px solid black;">Address</td>
 			<td style="border: 1px solid black;">Menu</td>
 		  </tr>
@@ -75,17 +74,17 @@ $dbname = "cs440_thomasza";
 			}
 			// get data from the database with an SQL query.
 			$sql = 
-			"SELECT rname AS Name, raddress AS Address, GROUP_CONCAT(DISTINCT mname) AS Menu
+			"SELECT rname AS Restaurant, raddress AS Address, GROUP_CONCAT(DISTINCT mname) AS Menu
 			FROM Rests AS R, Meals AS M, Rests_Meals AS RM
 			WHERE R.rid = RM.rid AND M.mid = RM.mid
 			GROUP BY rname
-			ORDER BY rname;
+			ORDER BY rname";
 			$result = $conn->query($sql);
 			// add a row to the table for each restaurant review.
 			while($row = $result->fetch_assoc()) {
 			?>
-			  <tr style="border: 1px solid black;">
-			  <td style="border: 1px solid black;"><?php echo $row["Name"]?></td>
+			  <tr width="600" style="border: 1px solid black;">
+			  <td style="border: 1px solid black;"><?php echo $row["Restaurant"]?></td>
 			  <td style="border: 1px solid black;"><?php echo $row["Address"]?></td>
 			  <td style="border: 1px solid black;"><?php echo $row["Menu"]?></td>
 			  </tr>

@@ -3,8 +3,6 @@
 session_start();
 ?>
 
-<?php error_reporting(E_ALL); ini_set('display_errors', '1');?>
-
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -40,33 +38,34 @@ $dbname = "cs440_thomasza";
 		<li class="current_page_item"><a href="#" accesskey="2" title="">RI+RR+RS</a></li>
 		<li><a href="./show-rests2.php" accesskey="3" title="">RI+C</a></li>
 		<li><a href="./show-rests3.php" accesskey="4" title="">RI+MI</a></li>
+		<li><a href="./show-rests4.php" accesskey="5" title="">RI="Fried Calamari"</a></li>
 	</ul>
 </div>
 
 <div id="banner" class="container"> <img src="images/pic03.jpg" width="1200" height="500" alt="" /></div>
 
 <div id="three-column" class="container">
-	<div id="tbox1" style="width:90%;">
+	<div id="tbox1" style="width:92%;">
 		<h2>Restaurant Info + Restaurant Reviews + Review Sources</h2>
 		<h3><b>SQL QUERY:<b/><br />
-		SELECT rname AS Name, raddress AS Address, roverall AS Overall_Rating, rfood AS Food_Rating, rservice AS Service_Rating,<br />
-		rvalue AS Value_Rating, ratmo AS Atmosphere_Rating, sname AS Review_Source<br />
+		<i>SELECT rname AS Restaurant, raddress AS Address, roverall AS Overall, rfood AS Food, rservice AS Service,<br />
+		rvalue AS Value, ratmo AS Atmosphere, sname AS Source<br />
 		FROM Rests R, Rating RT, Sources S<br />
 		WHERE R.rid = RT.rid AND RT.sid = S.sid<br />
-		ORDER BY rname;<br /><br /><br /></h3>
+		ORDER BY rname;<i/><br /><br /><br /></h3>
 		
 		<!-- create table from restaurant info -->
-		<table style="border: 1px solid black;">
+		<table width="100%" style="border: 1px solid black;table-layout: fixed;">
 		<thead>
 		  <tr style="border: 1px solid black;">
-			<td style="border: 1px solid black;">Name</td>
+			<td style="border: 1px solid black;">Restaurant</td>
 			<td style="border: 1px solid black;">Address</td>
-			<td style="border: 1px solid black;">Overall_Rating</td>
-			<td style="border: 1px solid black;">Food_Rating</td>
-			<td style="border: 1px solid black;">Service_Rating</td>
-			<td style="border: 1px solid black;">Value_Rating</td>
-			<td style="border: 1px solid black;">Atmosphere_Rating</td>
-			<td style="border: 1px solid black;">Review_Source</td>
+			<td style="border: 1px solid black;">Overall</td>
+			<td style="border: 1px solid black;">Food</td>
+			<td style="border: 1px solid black;">Service</td>
+			<td style="border: 1px solid black;">Value</td>
+			<td style="border: 1px solid black;">Atmosphere</td>
+			<td style="border: 1px solid black;">Source</td>
 		  </tr>
 		</thead>
 		<tbody>
@@ -79,7 +78,7 @@ $dbname = "cs440_thomasza";
 				die("Connection failed: " . $conn->connect_error);
 			}
 			// get data from the database with an SQL query.
-			$sql = "SELECT rname AS Name, raddress AS Address, roverall AS Overall_Rating, rfood AS Food_Rating, rservice AS Service_Rating, rvalue AS Value_Rating, ratmo AS Atmosphere_Rating, sname AS Review_Source
+			$sql = "SELECT rname AS Restaurant, raddress AS Address, roverall AS Overall, rfood AS Food, rservice AS Service, rvalue AS Value, ratmo AS Atmosphere, sname AS Source
 			FROM Rests R, Rating RT, Sources S 
 			WHERE R.rid = RT.rid 
 			AND RT.sid = S.sid 
@@ -89,14 +88,14 @@ $dbname = "cs440_thomasza";
 			while($row = $result->fetch_assoc()) {
 			?>
 			  <tr style="border: 1px solid black;">
-			  <td style="border: 1px solid black;"><?php echo $row["Name"]?></td>
+			  <td style="border: 1px solid black;"><?php echo $row["Restaurant"]?></td>
 			  <td style="border: 1px solid black;"><?php echo $row["Address"]?></td>
-			  <td style="border: 1px solid black;"><?php echo $row["Overall_Rating"]?></td>
-			  <td style="border: 1px solid black;"><?php echo $row["Food_Rating"]?></td>
-			  <td style="border: 1px solid black;"><?php echo $row["Service_Rating"]?></td>
-			  <td style="border: 1px solid black;"><?php echo $row["Value_Rating"]?></td>
-			  <td style="border: 1px solid black;"><?php echo $row["Atmosphere_Rating"]?></td>
-			  <td style="border: 1px solid black;"><?php echo $row["Review_Source"]?></td>
+			  <td style="border: 1px solid black;"><?php echo $row["Overall"]?></td>
+			  <td style="border: 1px solid black;"><?php echo $row["Food"]?></td>
+			  <td style="border: 1px solid black;"><?php echo $row["Service"]?></td>
+			  <td style="border: 1px solid black;"><?php echo $row["Value"]?></td>
+			  <td style="border: 1px solid black;"><?php echo $row["Atmosphere"]?></td>
+			  <td style="border: 1px solid black;"><?php echo $row["Source"]?></td>
 			  </tr>
 		<?php
 		}
