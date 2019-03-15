@@ -1,3 +1,15 @@
+PARAMETERS
+(IN,_rname,VARCHAR,100);
+(IN,_raddress,VARCHAR,100);
+(IN,_roverall,INT,3);
+(IN,_rfood,INT,3);
+(IN,_rservice,INT,3);
+(IN,_rvalue,INT,3);
+(IN,_ratmo,INT,3);
+(IN,_cname,VARCHAR,100);
+(IN,_mname,VARCHAR,100);
+(IN,_source,INT,3);
+
 BEGIN
 	
     # We declare ids that we will find later.

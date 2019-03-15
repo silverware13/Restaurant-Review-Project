@@ -1,3 +1,7 @@
+PARAMETERS
+(IN,_source,INT,3);
+(IN,_rows,INT,3);
+
 BEGIN
 
   # Declare the diffrent columns in a row.
