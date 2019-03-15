@@ -58,14 +58,14 @@ $dbname = "cs440_thomasza";
 		<table width="100%" style="border: 1px solid black;table-layout: fixed;">
 		<thead>
 		  <tr style="border: 1px solid black;">
-			<td style="border: 1px solid black;">Restaurant</td>
-			<td style="border: 1px solid black;">Address</td>
+			<td style="border: 1px solid black; width: 300px">Restaurant</td>
+			<td style="border: 1px solid black; width: 300px">Address</td>
 			<td style="border: 1px solid black;">Overall</td>
 			<td style="border: 1px solid black;">Food</td>
 			<td style="border: 1px solid black;">Service</td>
 			<td style="border: 1px solid black;">Value</td>
-			<td style="border: 1px solid black;">Atmosphere</td>
-			<td style="border: 1px solid black;">Source</td>
+			<td style="border: 1px solid black; width: 100px">Atmosphere</td>
+			<td style="border: 1px solid black; width: 125px">Source</td>
 		  </tr>
 		</thead>
 		<tbody>
